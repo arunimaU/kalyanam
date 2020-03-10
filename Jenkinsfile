@@ -23,7 +23,7 @@ pipeline{
 
             steps{
 
-             sh '/opt/maven/bin/mvn clean package'
+             sh '/opt/maven/bin/mvn clean verify sonar:sonar -Dmaven.test.skip=true'
 
             }
 

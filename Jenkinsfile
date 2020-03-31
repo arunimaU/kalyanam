@@ -4,19 +4,12 @@ pipeline{
     agent any
 
     stages{
-
-       
-
+     
          stage('Getting Code From GitHub')
-
       {
-
         steps {
-
               git 'https://github.com/arunimaU/kalyanam.git'
-
               }
-
       }
 
         stage('Build'){
@@ -41,7 +34,11 @@ pipeline{
                 sh 'export JENKINS_NODE_COOKIE=dontkillme ;nohup java-jar $WORKSPACE/target/*.jar &'
                 }
                 }
-                
+                stage ('DB Migration') {
+		steps {
+			sh '/opt/maven/bin/mvn clean flyway:migrate'
+		}
+	}
 
     }
 
